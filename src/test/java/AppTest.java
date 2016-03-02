@@ -18,32 +18,32 @@ public class AppTest extends FluentTest {
 
 
 
-  // @Test
-  // public void rootTest() {
-  //     goTo("http://localhost:4567/");
-  //     assertThat(pageSource()).contains("Registrar");
-  // }
-  //
-  //
-  // @Test
-  // public void addStudent() {
-  //   goTo("http://localhost:4567/students");
-  //   fill("#student_name").with("John");
-  //   fill("#enroll_date").with("1900/01/01");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("John");
-  //   assertThat(pageSource()).contains("1900");
-  // }
-  //
-  // @Test
-  // public void addCourse() {
-  //   goTo("http://localhost:4567/courses");
-  //   fill("#description").with("History");
-  //   fill("#number").with("101");
-  //   submit(".btn");
-  //   assertThat(pageSource()).contains("History");
-  //   assertThat(pageSource()).contains("101");
-  // }
+  @Test
+  public void rootTest() {
+      goTo("http://localhost:4567/");
+      assertThat(pageSource()).contains("Recipe Box");
+  }
+
+
+  @Test
+  public void addRecipe() {
+    goTo("http://localhost:4567/recipes");
+    fill("#recipe_name").with("John");
+    fill("#ingredients").with("1900/01/01");
+    submit(".btn");
+    assertThat(pageSource()).contains("John");
+    assertThat(pageSource()).contains("1900");
+  }
+  
+  @Test
+  public void addCourse() {
+    goTo("http://localhost:4567/courses");
+    fill("#description").with("History");
+    fill("#number").with("101");
+    submit(".btn");
+    assertThat(pageSource()).contains("History");
+    assertThat(pageSource()).contains("101");
+  }
   //
   // @Test
   // public void addCourseToStudent() {
