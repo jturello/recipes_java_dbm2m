@@ -61,7 +61,7 @@ public class Recipe {
   }
 
   public static  List<Recipe> all() {
-    String sql = "SELECT id, title, ingredients, instructions, rating FROM recipes ORDER BY rating DESC";
+    String sql = "SELECT * FROM recipes ORDER BY rating DESC";
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Recipe.class);
     }
@@ -76,47 +76,66 @@ public class Recipe {
       return this.getTitle().equals(newRecipe.getTitle());
     }
   }
-  //
-  // public void save() {
-  //   String sql = "INSERT INTO students (student_name, enroll_date) VALUES (:student_name, :enroll_date)";
-  //    try(Connection con = DB.sql2o.open()) {
-  //     this.id = (int) con.createQuery(sql, true)
-  //       .addParameter("student_name", student_name)
-  //       .addParameter("enroll_date", enroll_date)
-  //       .executeUpdate()
-  //       .getKey();
-  //   }
-  // }
-  //
-  // public static Student find(int id) {
-  //   String sql = "SELECT id, student_name, enroll_date FROM students WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     Student student = con.createQuery(sql)
-  //     .addParameter("id", id)
-  //     .executeAndFetchFirst(Student.class);
-  //     return student;
-  //   }
-  // }
-  //
-  // public void updateName(String student_name) {
-  //   String sql ="UPDATE students SET student_name = :student_name WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     con.createQuery(sql)
-  //     .addParameter("student_name", student_name)
-  //     .addParameter("id", id)
-  //     .executeUpdate();
-  //   }
-  // }
-  //
-  // public void updateDate(String enroll_date) {
-  //   String sql ="UPDATE students SET enroll_date = :enroll_date WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     con.createQuery(sql)
-  //     .addParameter("enroll_date", enroll_date)
-  //     .addParameter("id", id)
-  //     .executeUpdate();
-  //   }
-  // }
+
+  public void save() {
+    String sql = "INSERT INTO recipes (title) VALUES (:title)";
+     try(Connection con = DB.sql2o.open()) {
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("title", title)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
+  public static Recipe find(int id) {
+    String sql = "SELECT * FROM recipes WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      Recipe recipe = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Recipe.class);
+      return recipe;
+    }
+  }
+
+  public void updateTitle(String title) {
+    String sql ="UPDATE recipes SET title = :title WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("title", title)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void updateIngredients(String ingredients) {
+    String sql ="UPDATE recipes SET ingredients = :ingredients WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("ingredients", ingredients)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void updateInstructions(String instructions) {
+    String sql ="UPDATE recipes SET instructions = :instructions WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("instructions", instructions)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void updateRating(int rating) {
+    String sql ="UPDATE recipes SET rating = :rating WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("rating", rating)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
   //
   // public void delete() {
   //   String sql ="DELETE FROM students WHERE id = :id";
