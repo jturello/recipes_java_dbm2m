@@ -7,33 +7,33 @@ public class TagTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
-  // @Test
-  // public void all_emptyAtFirst() {
-  //   assertEquals(Course.all().size(), 0);
-  // }
-  //
-  // @Test
-  // public void equals_returnsTrueIfNamesAreTheSame() {
-  //   Course firstCourse = new Course("History", "101");
-  //   Course secondCourse = new Course("History", "101");
-  //   assertTrue(firstCourse.equals(secondCourse));
-  // }
-  //
-  // @Test
-  // public void save_addsInstanceOfCourseToDatabase() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   Course savedCourse = Course.all().get(0);
-  //   assertTrue(newCourse.equals(savedCourse));
-  // }
-  //
-  // @Test
-  // public void save_assignsIdToObject() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   Course savedCourse = Course.all().get(0);
-  //   assertEquals(newCourse.getId(), savedCourse.getId());
-  // }
+  @Test
+  public void all_emptyAtFirst() {
+    assertEquals(Tag.all().size(), 0);
+  }
+
+  @Test
+  public void equals_returnsTrueIfTitlesAreTheSame() {
+    Tag firstTag = new Tag("Mexican");
+    Tag secondTag = new Tag("Mexican");
+    assertTrue(firstTag.equals(secondTag));
+  }
+
+  @Test
+  public void save_addsInstanceOfTagToDatabase() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Tag savedTag = Tag.all().get(0);
+    assertTrue(newTag.equals(savedTag));
+  }
+
+  @Test
+  public void save_assignsIdToObject() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Tag savedTag = Tag.all().get(0);
+    assertEquals(newTag.getId(), savedTag.getId());
+  }
   //
   // @Test
   // public void find_locatesAllInstancesOfClassInDatabaseUsingId() {

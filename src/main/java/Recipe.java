@@ -136,15 +136,15 @@ public class Recipe {
       .executeUpdate();
     }
   }
-  //
-  // public void delete() {
-  //   String sql ="DELETE FROM students WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeUpdate();
-  //   }
-  // }
+
+  public void delete() {
+    String sql ="DELETE FROM recipes WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
   //
   // public void addCourse (Course course) {
   //   try(Connection con = DB.sql2o.open()) {

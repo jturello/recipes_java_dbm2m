@@ -74,15 +74,15 @@ public class RecipeTest {
     newRecipe.updateRating(4);
     assertEquals(Recipe.all().get(0).getRating(), (4));
   }
-  //
-  // @Test
-  // public void deleteStudent_deleteStudentObject() {
-  //   Student newStudent = new Student("Sally", "1900/01/01");
-  //   newStudent.save();
-  //   newStudent.delete();
-  //   assertEquals(Student.all().size(), 0);
-  // }
-  //
+  
+  @Test
+  public void deleteRecipe() {
+    Recipe newRecipe = new Recipe("BLT");
+    newRecipe.save();
+    newRecipe.delete();
+    assertEquals(Recipe.all().size(), 0);
+  }
+
   // @Test
   // public void addCourse_addsCourseToStudent() {
   //   Student newStudent = new Student("Sally", "1900/01/01");

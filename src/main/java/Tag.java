@@ -3,56 +3,48 @@ import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Tag {
-  // private String description;
-  // private String number;
-  // private int id;
-  //
-  // public String getDescription() {
-  //   return description;
-  // }
-  //
-  // public String getNumber() {
-  //   return number;
-  // }
-  //
-  // public int getId() {
-  //   return id;
-  // }
-  //
-  // public Course (String description, String number) {
-  //   this.description = description;
-  //   this.number = number;
-  // }
-  //
-  // public static  List<Course> all() {
-  //   String sql = "SELECT id, description, number FROM courses";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     return con.createQuery(sql).executeAndFetch(Course.class);
-  //   }
-  // }
-  //
-  // @Override
-  // public boolean equals(Object otherCourse) {
-  //   if (!(otherCourse instanceof Course)) {
-  //     return false;
-  //   } else {
-  //     Course newCourse = (Course) otherCourse;
-  //     return this.getDescription().equals(newCourse.getDescription()) &&
-  //     this.getNumber().equals(newCourse.getNumber()) &&
-  //     this.getId() == newCourse.getId();
-  //   }
-  // }
-  //
-  // public void save() {
-  //   String sql = "INSERT INTO courses (description, number) VALUES (:description, :number)";
-  //    try(Connection con = DB.sql2o.open()) {
-  //     this.id = (int) con.createQuery(sql, true)
-  //       .addParameter("description", description)
-  //       .addParameter("number", number)
-  //       .executeUpdate()
-  //       .getKey();
-  //   }
-  // }
+  private String title;
+  private int id;
+
+  public String getTitle() {
+    return title;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public Tag (String title) {
+    this.title = title;
+  }
+
+  public static  List<Tag> all() {
+    String sql = "SELECT * FROM tags";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Tag.class);
+    }
+  }
+
+  @Override
+  public boolean equals(Object otherTag) {
+    if (!(otherTag instanceof Tag)) {
+      return false;
+    } else {
+      Tag newTag = (Tag) otherTag;
+      return this.getTitle().equals(newTag.getTitle()) &&
+      this.getId() == newTag.getId();
+    }
+  }
+
+  public void save() {
+    String sql = "INSERT INTO tags (title) VALUES (:title)";
+     try(Connection con = DB.sql2o.open()) {
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("title", title)
+        .executeUpdate()
+        .getKey();
+    }
+  }
   //
   // public static Course find(int id) {
   //   String sql = "SELECT id, description, number FROM courses WHERE id = :id";
