@@ -1,0 +1,19 @@
+tags.vtl
+
+<h2>All Tags</h2>
+
+<ul>
+#foreach ($tag in $tags)
+  <li><a href="/tags/$tag.getId()">$tag.getTitle()</a></li>
+#end
+</ul>
+
+<form action="/tags" method="post">
+  <label for="tagTitle">Tag Title</label>
+  <input id="tagTitle" name="tagTitle" type="text" required autofocus="autofocus">
+
+  <button type="submit">Add Tag</button>
+</form>
+
+<a href="/recipes">Return to Recipe List</a>
+<a href="/tags">Return to Tag List</a>

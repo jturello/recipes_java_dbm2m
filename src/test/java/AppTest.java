@@ -34,15 +34,13 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("John");
     assertThat(pageSource()).contains("1900");
   }
-  
+
   @Test
-  public void addCourse() {
-    goTo("http://localhost:4567/courses");
-    fill("#description").with("History");
-    fill("#number").with("101");
+  public void addTag() {
+    goTo("http://localhost:4567/tags");
+    fill("#tagTitle").with("History");
     submit(".btn");
     assertThat(pageSource()).contains("History");
-    assertThat(pageSource()).contains("101");
   }
   //
   // @Test

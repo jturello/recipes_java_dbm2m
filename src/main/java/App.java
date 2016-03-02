@@ -20,7 +20,13 @@ public class App {
       model.put("template", "templates/recipes.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-    //
+
+    get("/tags", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("tags", Tag.all());
+      model.put("template", "templates/tags.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
     // post("/students", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
     //   String student_name = request.queryParams("student_name");
@@ -63,12 +69,6 @@ public class App {
     //
     //
     //
-    // get("/courses", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   model.put("courses", Course.all());
-    //   model.put("template", "templates/courses.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
     //
     // post("/courses", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
