@@ -74,7 +74,7 @@ public class RecipeTest {
     newRecipe.updateRating(4);
     assertEquals(Recipe.all().get(0).getRating(), (4));
   }
-  
+
   @Test
   public void deleteRecipe() {
     Recipe newRecipe = new Recipe("BLT");
@@ -83,29 +83,29 @@ public class RecipeTest {
     assertEquals(Recipe.all().size(), 0);
   }
 
-  // @Test
-  // public void addCourse_addsCourseToStudent() {
-  //   Student newStudent = new Student("Sally", "1900/01/01");
-  //   newStudent.save();
-  //
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //
-  //   newStudent.addCourse(newCourse);
-  //   Course savedCourse = newStudent.getCourses().get(0);
-  //   assertTrue(newCourse.equals(savedCourse));
-  // }
-  //
-  // @Test
-  // public void getCourses_getsStudentCoursesByStudentID() {
-  //   Student newStudent = new Student("Sally", "1900/01/01");
-  //   newStudent.save();
-  //
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //
-  //   newStudent.addCourse(newCourse);
-  //   List savedCourses = newStudent.getCourses();
-  //   assertEquals(savedCourses.size(), 1);
-  // }
+  @Test
+  public void addTag_addsTagToRecipe() {
+    Recipe newRecipe = new Recipe("BLT");
+    newRecipe.save();
+
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+
+    newRecipe.addTag(newTag);
+    Tag savedTag = newRecipe.getTags().get(0);
+    assertTrue(newTag.equals(savedTag));
+  }
+
+  @Test
+  public void getTags_getsRecipesTagsByRecipeID() {
+    Recipe newRecipe = new Recipe("BLT");
+    newRecipe.save();
+
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+
+    newRecipe.addTag(newTag);
+    List savedTags = newRecipe.getTags();
+    assertEquals(savedTags.size(), 1);
+  }
 }

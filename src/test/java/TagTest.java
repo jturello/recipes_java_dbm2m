@@ -34,62 +34,54 @@ public class TagTest {
     Tag savedTag = Tag.all().get(0);
     assertEquals(newTag.getId(), savedTag.getId());
   }
-  //
-  // @Test
-  // public void find_locatesAllInstancesOfClassInDatabaseUsingId() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   Course savedCourse = Course.find(newCourse.getId());
-  //   assertTrue(newCourse.equals(savedCourse));
-  // }
-  //
-  // @Test
-  // public void updateDescription_updatesDescriptionOfObject() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   newCourse.updateDescription("Chemistry");
-  //   assertEquals(Course.all().get(0).getDescription(), ("Chemistry"));
-  // }
-  //
-  // @Test
-  // public void updateNumber_updatesNumberOfObject() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   newCourse.updateNumber("102");
-  //   assertEquals(Course.all().get(0).getNumber(), ("102"));
-  // }
-  //
-  // @Test
-  // public void deleteCourse_deleteCourseObject() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   newCourse.delete();
-  //   assertEquals(Course.all().size(), 0);
-  // }
-  //
-  // @Test
-  // public void addStudent_addsStudentToCourse() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //
-  //   Student newStudent = new Student("Sally", "1900/01/01");
-  //   newStudent.save();
-  //
-  //   newCourse.addStudent(newStudent);
-  //   Student savedStudent = newCourse.getStudents().get(0);
-  //   assertTrue(newStudent.equals(savedStudent));
-  // }
-  //
-  // @Test
-  // public void getStudents_getsCourseStudentsByCourseID() {
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //
-  //   Student newStudent = new Student("Sally", "1900/01/01");
-  //   newStudent.save();
-  //
-  //   newCourse.addStudent(newStudent);
-  //   List savedStudents = newCourse.getStudents();
-  //   assertEquals(savedStudents.size(), 1);
-  // }
+
+  @Test
+  public void find_locatesAllInstancesOfClassInDatabaseUsingId() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Tag savedTag = Tag.find(newTag.getId());
+    assertTrue(newTag.equals(savedTag));
+  }
+
+  @Test
+  public void update_updatesTitleOfObject() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    newTag.update("Italian");
+    assertEquals(Tag.all().get(0).getTitle(), ("Italian"));
+  }
+
+  @Test
+  public void delete_deleteTagObject() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    newTag.delete();
+    assertEquals(Tag.all().size(), 0);
+  }
+
+  @Test
+  public void addRecipe_addsRecipeToTag() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+
+    Recipe newRecipe = new Recipe("Enchilada");
+    newRecipe.save();
+
+    newTag.addRecipe(newRecipe);
+    Recipe savedRecipe = newTag.getRecipes().get(0);
+    assertTrue(newRecipe.equals(savedRecipe));
+  }
+
+  @Test
+  public void getRecipe_getsTagRecipeByTagID() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+
+    newTag.addRecipe(newRecipe);
+    List savedRecipe = newTag.getRecipes();
+    assertEquals(savedRecipe.size(), 1);
+  }
 }

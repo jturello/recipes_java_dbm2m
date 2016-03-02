@@ -145,30 +145,27 @@ public class Recipe {
         .executeUpdate();
     }
   }
-  //
-  // public void addCourse (Course course) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "INSERT INTO students_courses (student_id, course_id) VALUES (:student_id, :course_id)";
-  //     con.createQuery(sql)
-  //     .addParameter("student_id", this.getId())
-  //     .addParameter("course_id", course.getId())
-  //     .executeUpdate();
-  //   }
-  // }
-  //
-  //
-  //
-  // public List<Course> getCourses() {
-  //
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT courses.* FROM students " +
-  //     "JOIN students_courses ON (students.id = students_courses.student_id) " +
-  //     "JOIN courses ON (students_courses.course_id = courses.id) " +
-  //     "WHERE students.id = :id";
-  //     List<Course> courses = con.createQuery(sql)
-  //     .addParameter("id", id)
-  //     .executeAndFetch(Course.class);
-  //     return courses;
-  //   }
-  // }
+
+  public void addTag (Tag tag) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO recipes_tags (tag_id, recipe_id) VALUES (:tag_id, :recipe_id)";
+      con.createQuery(sql)
+      .addParameter("recipe_id", this.getId())
+      .addParameter("tag_id", tag.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Tag> getTags() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT tags.* FROM tags " +
+      "JOIN recipes_tags ON (tags.id = tag_id) " +
+      "JOIN recipes ON (recipes.id = recipe_id) " +
+      "WHERE recipes.id = :id";
+      List<Tag> tags = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetch(Tag.class);
+      return tags;
+    }
+  }
 }

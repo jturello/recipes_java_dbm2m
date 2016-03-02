@@ -45,67 +45,57 @@ public class Tag {
         .getKey();
     }
   }
-  //
-  // public static Course find(int id) {
-  //   String sql = "SELECT id, description, number FROM courses WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     Course course = con.createQuery(sql)
-  //     .addParameter("id", id)
-  //     .executeAndFetchFirst(Course.class);
-  //     return course;
-  //   }
-  // }
-  //
-  // public void updateDescription(String description) {
-  //   String sql ="UPDATE courses SET description = :description WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     con.createQuery(sql)
-  //     .addParameter("description", description)
-  //     .addParameter("id", id)
-  //     .executeUpdate();
-  //   }
-  // }
-  //
-  // public void updateNumber(String number) {
-  //   String sql ="UPDATE courses SET number = :number WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     con.createQuery(sql)
-  //     .addParameter("number", number)
-  //     .addParameter("id", id)
-  //     .executeUpdate();
-  //   }
-  // }
-  //
-  // public void delete() {
-  //   String sql ="DELETE FROM courses WHERE id = :id";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeUpdate();
-  //   }
-  // }
-  //
-  // public void addStudent (Student student) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "INSERT INTO students_courses (student_id, course_id) VALUES (:student_id, :course_id)";
-  //     con.createQuery(sql)
-  //     .addParameter("course_id", this.getId())
-  //     .addParameter("student_id", student.getId())
-  //     .executeUpdate();
-  //   }
-  // }
-  //
-  // public List<Student> getStudents() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //
-  //     String sql = "SELECT students.* FROM courses " +
-  //     "JOIN students_courses ON (courses.id = students_courses.course_id) " +
-  //     "JOIN students ON (students_courses.student_id = students.id) " +
-  //     "WHERE courses.id = :id";
-  //     List<Student> students = con.createQuery(sql)
-  //     .addParameter("id", id)
-  //     .executeAndFetch(Student.class);
-  //     return students;
-  //   }
-  // }
+
+  public static Tag find(int id) {
+    String sql = "SELECT id, title FROM tags WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      Tag tag = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetchFirst(Tag.class);
+      return tag;
+    }
+  }
+
+  public void update(String title) {
+    String sql ="UPDATE tags SET title = :title WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+      .addParameter("title", title)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    String sql ="DELETE FROM tags WHERE id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void addRecipe (Recipe recipe) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO recipes_tags (recipe_id, tag_id) VALUES (:recipe_id, :tag_id)";
+      con.createQuery(sql)
+      .addParameter("tag_id", this.getId())
+      .addParameter("recipe_id", recipe.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Recipe> getRecipes() {
+    try(Connection con = DB.sql2o.open()) {
+
+      String sql = "SELECT recipes.* FROM tags " +
+      "JOIN recipes_tags ON (tags.id = tag_id) " +
+      "JOIN recipes ON (recipe_id = recipes.id) " +
+      "WHERE tags.id = :id";
+      List<Recipe> recipes = con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetch(Recipe.class);
+      return recipes;
+    }
+  }
   }
