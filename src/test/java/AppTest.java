@@ -42,30 +42,30 @@ public class AppTest extends FluentTest {
     submit(".btn");
     assertThat(pageSource()).contains("History");
   }
-  //
-  // @Test
-  // public void addCourseToStudent() {
-  //   Student newStudent = new Student("Jim", "12/12/2012");
-  //   newStudent.save();
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   String studentPath = String.format("http://localhost:4567/students/%d", newStudent.getId());
-  //   goTo(studentPath);
-  //   assertThat(pageSource()).contains("Jim");
-  //   assertThat(pageSource()).contains("History");
-  // }
-  //
-  // @Test
-  // public void addStudentToCourse() {
-  //   Student newStudent = new Student("Jim", "12/12/2012");
-  //   newStudent.save();
-  //   Course newCourse = new Course("History", "101");
-  //   newCourse.save();
-  //   String coursePath = String.format("http://localhost:4567/courses/%d", newCourse.getId());
-  //   goTo(coursePath);
-  //   assertThat(pageSource()).contains("Jim");
-  //   assertThat(pageSource()).contains("History");
-  // }
+
+  @Test
+  public void addTagToRecipe() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+    String recipePath = String.format("http://localhost:4567/recipes/%d", newRecipe.getId());
+    goTo(recipePath);
+    assertThat(pageSource()).contains("Mexican");
+    assertThat(pageSource()).contains("Tacos");
+  }
+
+  @Test
+  public void addRecipeToTag() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+    String tagPath = String.format("http://localhost:4567/tags/%d", newTag.getId());
+    goTo(tagPath);
+    assertThat(pageSource()).contains("Mexican");
+    assertThat(pageSource()).contains("Tacos");
+  }
   /*
   @Test
   public void negativeNumber() {

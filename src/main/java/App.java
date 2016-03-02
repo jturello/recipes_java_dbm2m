@@ -27,6 +27,27 @@ public class App {
       model.put("template", "templates/tags.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/recipes/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Recipe recipe = Recipe.find(id);
+      model.put("recipe", recipe);
+      model.put("allTags", Tag.all());
+      model.put("template", "templates/recipe.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+  get("/tags/:id", (request, response) -> {
+    HashMap<String, Object> model = new HashMap<String, Object>();
+    int id = Integer.parseInt(request.params("id"));
+    Tag tag = Tag.find(id);
+    model.put("tag", tag);
+    model.put("allRecipes", Recipe.all());
+    model.put("template", "templates/tag.vtl");
+    return new ModelAndView(model, layout);
+  }, new VelocityTemplateEngine());
+
     // post("/students", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
     //   String student_name = request.queryParams("student_name");
@@ -36,16 +57,6 @@ public class App {
     //   response.redirect("/students");
     //   return null;
     // });
-    //
-    // get("/students/:id", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   int id = Integer.parseInt(request.params("id"));
-    //   Student student = Student.find(id);
-    //   model.put("student", student);
-    //   model.put("allCourses", Course.all());
-    //   model.put("template", "templates/student.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
     //
     // post("/students/:id", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
@@ -80,15 +91,7 @@ public class App {
     //   return null;
     // });
     //
-    // get("/courses/:id", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   int id = Integer.parseInt(request.params("id"));
-    //   Course course = Course.find(id);
-    //   model.put("course", course);
-    //   model.put("allStudents", Student.all());
-    //   model.put("template", "templates/course.vtl");
-    //   return new ModelAndView(model, layout);
-    // }, new VelocityTemplateEngine());
+
     //
     // post("/courses/:id", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
