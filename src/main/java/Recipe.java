@@ -3,45 +3,79 @@ import java.util.ArrayList;
 import org.sql2o.*;
 
 public class Recipe {
-  // private String student_name;
-  // private String enroll_date;
-  // private int id;
-  //
-  // public String getName() {
-  //   return student_name;
-  // }
-  //
-  // public String getDate() {
-  //   return enroll_date;
-  // }
-  //
-  // public int getId() {
-  //   return id;
-  // }
-  //
-  // public Student (String student_name, String enroll_date) {
-  //   this.student_name = student_name;
-  //   this.enroll_date = enroll_date;
-  // }
-  //
-  // public static  List<Student> all() {
-  //   String sql = "SELECT id, student_name, enroll_date FROM students ORDER BY enroll_date";
-  //   try(Connection con = DB.sql2o.open()) {
-  //     return con.createQuery(sql).executeAndFetch(Student.class);
-  //   }
-  // }
-  //
-  // @Override
-  // public boolean equals(Object otherStudent) {
-  //   if (!(otherStudent instanceof Student)) {
-  //     return false;
-  //   } else {
-  //     Student newStudent = (Student) otherStudent;
-  //     return this.getName().equals(newStudent.getName()) &&
-  //     this.getDate().equals(newStudent.getDate()) &&
-  //     this.getId() == newStudent.getId();
-  //   }
-  // }
+  private int id;
+  private String instructions;
+  private String ingredients;
+  private int rating;
+  private String title;
+
+
+  public String getInstructions() {
+    return instructions;
+  }
+
+  public String getIngredients() {
+    return ingredients;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public int getRating() {
+    return rating;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public Recipe (String title, String ingredients, String instructions, int rating) {
+    this.title = title;
+    this.ingredients = ingredients;
+    this.instructions = instructions;
+    this.rating = rating;
+  }
+
+  public Recipe (String title, String ingredients, String instructions) {
+    this.title = title;
+    this.ingredients = ingredients;
+    this.instructions = instructions;
+    this.rating = -1;
+  }
+
+  public Recipe (String title, String ingredients) {
+    this.title = title;
+    this.ingredients = ingredients;
+    this.instructions = "";
+    this.rating = -1;
+
+  }
+
+  public Recipe (String title) {
+    this.title = title;
+    this.ingredients = "";
+    this.instructions = "";
+    this.rating = -1;
+
+  }
+
+  public static  List<Recipe> all() {
+    String sql = "SELECT id, title, ingredients, instructions, rating FROM recipes ORDER BY rating DESC";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql).executeAndFetch(Recipe.class);
+    }
+  }
+
+  @Override
+  public boolean equals(Object otherRecipe) {
+    if (!(otherRecipe instanceof Recipe)) {
+      return false;
+    } else {
+      Recipe newRecipe = (Recipe) otherRecipe;
+      return this.getTitle().equals(newRecipe.getTitle());
+    }
+  }
   //
   // public void save() {
   //   String sql = "INSERT INTO students (student_name, enroll_date) VALUES (:student_name, :enroll_date)";

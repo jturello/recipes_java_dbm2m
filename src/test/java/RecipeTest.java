@@ -7,17 +7,17 @@ public class RecipeTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
-  // @Test
-  // public void all_emptyAtFirst() {
-  //   assertEquals(Student.all().size(), 0);
-  // }
-  //
-  // @Test
-  // public void equals_returnsTrueIfNamesAreTheSame() {
-  //   Student firstStudent = new Student("Sally", "1900/01/01");
-  //   Student secondStudent = new Student("Sally", "1900/01/01");
-  //   assertTrue(firstStudent.equals(secondStudent));
-  // }
+  @Test
+  public void all_emptyAtFirst() {
+    assertEquals(Recipe.all().size(), 0);
+  }
+
+  @Test
+  public void equals_returnsTrueIfNamesAreTheSame() {
+    Recipe firstRecipe = new Recipe("BLT");
+    Recipe secondRecipe = new Recipe("BLT", "bacon, lettice, tomato");
+    assertTrue(firstRecipe.equals(secondRecipe));
+  }
   //
   // @Test
   // public void save_addsInstanceOfStudentToDatabase() {
