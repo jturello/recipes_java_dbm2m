@@ -38,25 +38,25 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-  get("/tags/:id", (request, response) -> {
-    HashMap<String, Object> model = new HashMap<String, Object>();
-    int id = Integer.parseInt(request.params("id"));
-    Tag tag = Tag.find(id);
-    model.put("tag", tag);
-    model.put("allRecipes", Recipe.all());
-    model.put("template", "templates/tag.vtl");
-    return new ModelAndView(model, layout);
-  }, new VelocityTemplateEngine());
+    get("/tags/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int id = Integer.parseInt(request.params("id"));
+      Tag tag = Tag.find(id);
+      model.put("tag", tag);
+      model.put("allRecipes", Recipe.all());
+      model.put("template", "templates/tag.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-    // post("/students", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   String student_name = request.queryParams("student_name");
-    //   String enroll_date = request.queryParams("enroll_date");
-    //   Student newStudent = new Student(student_name, enroll_date);
-    //   newStudent.save();
-    //   response.redirect("/students");
-    //   return null;
-    // });
+    post("/recipes", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String recipe_name = request.queryParams("recipe_name");
+      String ingredients = request.queryParams("ingredients");
+      Recipe newRecipe = new Recipe(recipe_name, ingredients);
+      newRecipe.save();
+      response.redirect("/recipes");
+      return null;
+    });
     //
     // post("/students/:id", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();

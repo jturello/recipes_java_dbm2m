@@ -1,21 +1,27 @@
 import org.fluentlenium.adapter.FluentTest;
+import static org.junit.Assert.*;
+import org.junit.*;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest extends FluentTest {
   public WebDriver webDriver = new HtmlUnitDriver();
+
+  @Override
   public WebDriver getDefaultDriver() {
       return webDriver;
   }
 
+  @Rule
+  public DatabaseRule database = new DatabaseRule();
+
   @ClassRule
   public static ServerRule server = new ServerRule();
-
-
 
 
   @Test
@@ -28,11 +34,11 @@ public class AppTest extends FluentTest {
   @Test
   public void addRecipe() {
     goTo("http://localhost:4567/recipes");
-    fill("#recipe_name").with("John");
-    fill("#ingredients").with("1900/01/01");
-    submit(".btn");
-    assertThat(pageSource()).contains("John");
-    assertThat(pageSource()).contains("1900");
+    fill("#recipe_name").with("Tacos");
+    fill("#ingredients").with("Beef");
+    submit("#addRecipe");
+    assertThat(pageSource()).contains("Tacos");
+    assertThat(pageSource()).contains("Beef");
   }
 
   @Test
@@ -66,6 +72,13 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Mexican");
     assertThat(pageSource()).contains("Tacos");
   }
+  // @Test
+  // public void checkThatSubmitButtonWorksOnRecipes() {
+  //   goTo("http://localhost:4567/recipes");
+  //   fill()
+  // }
+
+
   /*
   @Test
   public void negativeNumber() {
