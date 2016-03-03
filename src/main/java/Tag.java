@@ -81,6 +81,19 @@ public class Tag {
     }
   }
 
+  public static void deleteAll() {
+    String sqlJoin ="DELETE FROM recipes_tags";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sqlJoin)
+        .executeUpdate();
+    }
+    String sql ="DELETE FROM tags ";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sql)
+        .executeUpdate();
+    }
+  }
+
   public void addRecipe (Recipe recipe) {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO recipes_tags (recipe_id, tag_id) VALUES (:recipe_id, :tag_id)";
