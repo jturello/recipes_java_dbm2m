@@ -66,31 +66,27 @@ public class App {
       return null;
     });
 
-    // post("/recipes/:id", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   int recipeId = Integer.parseInt(request.queryParams("recipe_id"));
-    //   int tagId = Integer.parseInt(request.queryParams("description"));
-    //   Tag tag = Tag.find(tagId);
-    //   Recipe recipe = Recipe.find(recipeId);
-    //   recipe.addTag(tag);
-    //   response.redirect("/recipes/" + recipeId);
-    //   return null;
-    // });
-    //
-    //
-    //
-    //
-    //
-    // post("/courses", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   String description = request.queryParams("description");
-    //   String number = request.queryParams("number");
-    //   Course newCourse = new Course(description, number);
-    //   newCourse.save();
-    //   response.redirect("/courses");
-    //   return null;
-    // });
-    //
+    post("/recipes/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int recipeId = Integer.parseInt(request.queryParams("recipe_id"));
+      int tagId = Integer.parseInt(request.queryParams("description"));
+      Tag tag = Tag.find(tagId);
+      Recipe recipe = Recipe.find(recipeId);
+      recipe.addTag(tag);
+      response.redirect("/recipes/" + recipeId);
+      return null;
+    });
+
+
+    post("/tags", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      String tagTitle = request.queryParams("tagTitle");
+      Tag newTag = new Tag(tagTitle);
+      newTag.save();
+      response.redirect("/tags");
+      return null;
+    });
+
 
     //
     // post("/courses/:id", (request, response) -> {

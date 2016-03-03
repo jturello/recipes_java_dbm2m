@@ -45,7 +45,7 @@ public class AppTest extends FluentTest {
   public void addTag() {
     goTo("http://localhost:4567/tags");
     fill("#tagTitle").with("History");
-    submit(".btn");
+    submit("#addTagBtn");
     assertThat(pageSource()).contains("History");
   }
 
@@ -84,9 +84,10 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/recipes");
     submit(recipeId);
     assertThat(pageSource()).doesNotContain(newRecipe.getTitle());
-
-
   }
+
+
+
   // @Test
   // public void checkThatSubmitButtonWorksOnRecipes() {
   //   goTo("http://localhost:4567/recipes");
