@@ -78,10 +78,13 @@ public class Recipe {
   }
 
   public void save() {
-    String sql = "INSERT INTO recipes (title) VALUES (:title)";
+    String sql = "INSERT INTO recipes (title, ingredients, instructions, rating) VALUES (:title, :ingredients, :instructions, :rating)";
      try(Connection con = DB.sql2o.open()) {
       this.id = (int) con.createQuery(sql, true)
         .addParameter("title", title)
+        .addParameter("ingredients", ingredients)
+        .addParameter("instructions", instructions)
+        .addParameter("rating", rating)
         .executeUpdate()
         .getKey();
     }
