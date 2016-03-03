@@ -2,6 +2,7 @@ import java.util.HashMap;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
+import java.util.*;
 
 public class App {
   public static void main(String[] args) {
@@ -17,6 +18,7 @@ public class App {
     get("/recipes", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       model.put("recipes", Recipe.all());
+
       model.put("template", "templates/recipes.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -27,6 +29,13 @@ public class App {
       model.put("template", "templates/tags.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/recipes/deleteAll", (request, response) -> {
+        HashMap<String, Object> model = new HashMap<String, Object>();
+        Recipe.deleteAll();
+        response.redirect("/recipes");
+        return null;
+    });
 
     get("/recipes/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -50,6 +59,7 @@ public class App {
 
     post("/recipes", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      System.out.println("post/recipes");
       String recipe_name = request.queryParams("recipe_name");
       String ingredients = request.queryParams("ingredients");
       Recipe newRecipe = new Recipe(recipe_name, ingredients);
@@ -57,6 +67,7 @@ public class App {
       response.redirect("/recipes");
       return null;
     });
+
     post("/recipes/:id/delete", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int recipeId = Integer.parseInt(request.queryParams("recipeId"));
@@ -105,6 +116,9 @@ public class App {
       response.redirect("/tags");
       return null;
     });
+
+
+
 
 
     //

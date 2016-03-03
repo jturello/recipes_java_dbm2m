@@ -125,6 +125,16 @@ public class AppTest extends FluentTest {
 
   }
 
+  @Test
+  public void deleteAllRecipes_displaysNoRecipesOnRecipePage() {
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+    goTo("http://localhost:4567/recipes");
+    submit("#deleteAllRecipesBtn");
+    assertThat(pageSource()).doesNotContain("Tacos");
+    assertThat(pageSource()).doesNotContain("Error");
+  }
+
 
   // @Test
   // public void checkThatSubmitButtonWorksOnRecipes() {

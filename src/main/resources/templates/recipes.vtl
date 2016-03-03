@@ -22,7 +22,14 @@ recipes.vtl
   <button type="submit" id="addRecipe">Add Recipe</button>
 </form>
 
+
+
 <hr>
 <a href="/recipes">Return to Recipe List</a>
 <p></p>
 <a href="/tags">Return to Tag List</a>
+
+
+<form action="/recipes/deleteAll" method="post">
+    <button id="deleteAllRecipesBtn" type="submit" class="btn btn-warning">Delete All Recipes</button>
+</form>
