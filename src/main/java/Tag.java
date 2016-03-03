@@ -67,12 +67,12 @@ public class Tag {
   }
 
   public void delete() {
-    // String sqlJoin ="DELETE FROM recipes_tags WHERE tag_id = :id";
-    // try(Connection con = DB.sql2o.open()) {
-    //   con.createQuery(sqlJoin)
-    //     .addParameter("id", id)
-    //     .executeUpdate();
-    // }
+    String sqlJoin ="DELETE FROM recipes_tags WHERE tag_id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sqlJoin)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
     String sql ="DELETE FROM tags WHERE id = :id";
     try(Connection con = DB.sql2o.open()) {
       con.createQuery(sql)

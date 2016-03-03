@@ -141,6 +141,12 @@ public class Recipe {
   }
 
   public void delete() {
+    String sqlJoin ="DELETE FROM recipes_tags WHERE recipe_id = :id";
+    try(Connection con = DB.sql2o.open()) {
+      con.createQuery(sqlJoin)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
     String sql ="DELETE FROM recipes WHERE id = :id";
     try(Connection con = DB.sql2o.open()) {
       con.createQuery(sql)
