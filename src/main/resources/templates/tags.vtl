@@ -5,6 +5,10 @@ tags.vtl
 <ul>
 #foreach ($tag in $tags)
   <li><a href="/tags/$tag.getId()">$tag.getTitle()</a></li>
+  <form action="/tags/$tag.getId()/delete" method="post">
+    <input id="tagId" name="tagId" type="hidden" value="$tag.getId()">
+    <button id="$tag.getId()" type ="submit">Delete Tag</button>
+  </form>
 #end
 </ul>
 

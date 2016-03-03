@@ -86,6 +86,44 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).doesNotContain(newRecipe.getTitle());
   }
 
+  @Test
+  public void deleteTag() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    String tagId = "#" + newTag.getId();
+    goTo("http://localhost:4567/tags");
+    submit(tagId);
+    assertThat(pageSource()).doesNotContain(newTag.getTitle());
+    assertThat(pageSource()).doesNotContain("404");
+  }
+
+  @Test
+  public void assignTagToRecipe() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+    // newRecipe.addTag(newTag);
+    goTo("http://localhost:4567/recipes/" + newRecipe.getId());
+    fillSelect("#tagTitle").withIndex(0);
+    submit("#assignTagBtn");
+    assertThat(pageSource()).contains("<a href=\"/tags/" + newTag.getId() + "\">");
+
+  }
+
+  @Test
+  public void assignRecipeToTag() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+    // newRecipe.addTag(newTag);
+    goTo("http://localhost:4567/tags/" + newTag.getId());
+    fillSelect("#recipe_id").withIndex(0);
+    submit("#assignRecipeBtn");
+    assertThat(pageSource()).contains("<a href=\"/recipes/" + newRecipe.getId() + "\">");
+
+  }
 
 
   // @Test

@@ -69,7 +69,7 @@ public class App {
     post("/recipes/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int recipeId = Integer.parseInt(request.queryParams("recipe_id"));
-      int tagId = Integer.parseInt(request.queryParams("description"));
+      int tagId = Integer.parseInt(request.queryParams("tagTitle"));
       Tag tag = Tag.find(tagId);
       Recipe recipe = Recipe.find(recipeId);
       recipe.addTag(tag);
@@ -77,12 +77,31 @@ public class App {
       return null;
     });
 
+    post("/tags/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int tagId = Integer.parseInt(request.queryParams("tag_id"));
+      int recipeId = Integer.parseInt(request.queryParams("recipe_id"));
+      Recipe recipe = Recipe.find(recipeId);
+      Tag tag = Tag.find(tagId);
+      tag.addRecipe(recipe);
+      response.redirect("/tags/" + tagId);
+      return null;
+    });
 
     post("/tags", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String tagTitle = request.queryParams("tagTitle");
       Tag newTag = new Tag(tagTitle);
       newTag.save();
+      response.redirect("/tags");
+      return null;
+    });
+
+    post("/tags/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int tagId = Integer.parseInt(request.queryParams("tagId"));
+      Tag tag = Tag.find(tagId);
+      tag.delete();
       response.redirect("/tags");
       return null;
     });
