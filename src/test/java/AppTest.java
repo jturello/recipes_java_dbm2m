@@ -72,6 +72,21 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Mexican");
     assertThat(pageSource()).contains("Tacos");
   }
+
+  @Test
+  public void deleteRecipe() {
+    Tag newTag = new Tag("Mexican");
+    newTag.save();
+    Recipe newRecipe = new Recipe("Tacos");
+    newRecipe.save();
+    newRecipe.addTag(newTag);
+    String recipeId = "#" + newRecipe.getId();
+    goTo("http://localhost:4567/recipes");
+    submit(recipeId);
+    assertThat(pageSource()).doesNotContain(newRecipe.getTitle());
+
+
+  }
   // @Test
   // public void checkThatSubmitButtonWorksOnRecipes() {
   //   goTo("http://localhost:4567/recipes");

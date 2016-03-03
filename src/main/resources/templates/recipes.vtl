@@ -5,9 +5,9 @@ recipes.vtl
 <ul>
 #foreach ($recipe in $recipes)
   <li><a href="/recipes/$recipe.getId()">$recipe.getTitle(), $recipe.getIngredients() </a></li>
-  <form action="/recipes/:id/delete" method="post">
+  <form action="/recipes/$recipe.getId()/delete" method="post">
     <input id="recipeId" name="recipeId" type="hidden" value="$recipe.getId()">
-    <button type="submit">Delete Recipe</button>
+    <button id="$recipe.getId()" type ="submit">Delete Recipe</button>
   </form>
 #end
 </ul>

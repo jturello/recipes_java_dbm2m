@@ -57,26 +57,26 @@ public class App {
       response.redirect("/recipes");
       return null;
     });
-    //
-    // post("/students/:id", (request, response) -> {
+    post("/recipes/:id/delete", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      int recipeId = Integer.parseInt(request.queryParams("recipeId"));
+      Recipe recipe = Recipe.find(recipeId);
+      recipe.delete();
+      response.redirect("/recipes");
+      return null;
+    });
+
+    // post("/recipes/:id", (request, response) -> {
     //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   int studentId = Integer.parseInt(request.queryParams("student_id"));
-    //   int courseId = Integer.parseInt(request.queryParams("description"));
-    //   Course course = Course.find(courseId);
-    //   Student student = Student.find(studentId);
-    //   student.addCourse(course);
-    //   response.redirect("/students/" + studentId);
+    //   int recipeId = Integer.parseInt(request.queryParams("recipe_id"));
+    //   int tagId = Integer.parseInt(request.queryParams("description"));
+    //   Tag tag = Tag.find(tagId);
+    //   Recipe recipe = Recipe.find(recipeId);
+    //   recipe.addTag(tag);
+    //   response.redirect("/recipes/" + recipeId);
     //   return null;
     // });
     //
-    // post("/students/:id/delete", (request, response) -> {
-    //   HashMap<String, Object> model = new HashMap<String, Object>();
-    //   int studentId = Integer.parseInt(request.queryParams("studentId"));
-    //   Student student = Student.find(studentId);
-    //   student.delete();
-    //   response.redirect("/students");
-    //   return null;
-    // });
     //
     //
     //
