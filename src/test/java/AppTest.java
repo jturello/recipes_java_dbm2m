@@ -135,6 +135,19 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).doesNotContain("Error");
   }
 
+  @Test
+  public void updateAllRecipes_updatesNameAndIngredients() {
+    Recipe newRecipe = new Recipe("Tacos", "Beef");
+    newRecipe.save();
+
+    goTo("http://localhost:4567/recipes/" + newRecipe.getId());
+    fill("#updateRecipeTitle").with("UpdatedTitle");
+    fill("#updateRecipeIngredients").with("Yak Butt");
+    submit("#updateRecipe");
+    assertThat(pageSource()).contains("UpdatedTitle");
+    assertThat(pageSource()).contains("Yak Butt");
+  }
+
 
   // @Test
   // public void checkThatSubmitButtonWorksOnRecipes() {
