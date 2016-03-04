@@ -44,7 +44,6 @@ public class App {
         String recipeTitle = request.queryParams("updateRecipeTitle");
         String recipeIngredients = request.queryParams("updateRecipeIngredients");
         recipe.updateAll(recipeTitle, recipeIngredients);
-        recipe.save();
         response.redirect("/recipes/" + id);
         return null;
     });
