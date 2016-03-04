@@ -5,9 +5,9 @@ tags.vtl
 <ul>
 #foreach ($tag in $tags)
   <li><a href="/tags/$tag.getId()">$tag.getTitle()</a></li>
-  <form action="/tags/$tag.getId()/delete" method="post">
-    <input id="tagId" name="tagId" type="hidden" value="$tag.getId()">
-    <button id="$tag.getId()" type ="submit">Delete Tag</button>
+  <form action="/tags/$tag.getId()/delete" class="form-inline" method="post">
+    <input id="tagId" name="tagId" class="form-control" type="hidden" value="$tag.getId()">
+    <button id="$tag.getId()" class="form-control" type ="submit">Delete Tag</button>
   </form>
 #end
 </ul>
@@ -19,6 +19,15 @@ tags.vtl
   <button id="addTagBtn" type="submit">Add Tag</button>
 </form>
 
+<hr>
+
 <a href="/recipes">Return to Recipe List</a>
 <p></p>
 <a href="/tags">Return to Tag List</a>
+
+<p></p>
+<p></p>
+
+<form action="/tags/deleteAll" method="post">
+    <button id="deleteAllTagsBtn" type="submit" class="btn btn-warning">Delete All Tags</button>
+</form>

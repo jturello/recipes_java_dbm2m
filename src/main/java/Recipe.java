@@ -140,6 +140,15 @@ public class Recipe {
     }
   }
 
+  public void updateAll(String titleUpdate, String ingredientsUpdate) {
+     updateTitle(titleUpdate);
+     updateIngredients(ingredientsUpdate);
+    //  updateInstructions(instructionsUpdate);
+    //  updateRating(ratingUpdate);
+    }
+
+
+
   public void delete() {
     String sqlJoin ="DELETE FROM recipes_tags WHERE recipe_id = :id";
     try(Connection con = DB.sql2o.open()) {

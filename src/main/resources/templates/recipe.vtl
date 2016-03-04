@@ -25,5 +25,20 @@ recipe.vtl
   <button id="assignTagBtn" type="submit">Assign Tag</button>
 </form>
 
+<hr>
+
+<form action="/recipes/$recipe.getId()/update" method="post">
+  <label for="updateRecipeTitle">Recipe Name</label>
+  <input id="updateRecipeTitle" name="updateRecipeTitle" type="text" required autofocus="autofocus" value="$recipe.getTitle()">
+
+  <label for="updateRecipeIngredients">Recipe Ingredients</label>
+  <input id="updateRecipeIngredients" name="updateRecipeIngredients" value="$recipe.getIngredients()" type="text" required>
+
+  <button type="submit" id="addRecipe">Update Recipe</button>
+</form>
+
+<hr>
+
   <a href="/recipes">Return to Recipe List</a>
+  <p></p>
   <a href="/tags">Return to Tag List</a>

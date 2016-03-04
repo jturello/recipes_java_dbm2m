@@ -37,6 +37,18 @@ public class App {
         return null;
     });
 
+    post("/recipes/:id/update", (request, response) -> {
+        HashMap<String, Object> model = new HashMap<String, Object>();
+        int id = Integer.parseInt(request.params("id"));
+        Recipe recipe = Recipe.find(id);
+        String recipeTitle = request.queryParams("updateRecipeTitle");
+        String recipeIngredients = request.queryParams("updateRecipeIngredients");
+        recipe.updateAll(recipeTitle, recipeIngredients);
+        recipe.save();
+        response.redirect("/recipes/" + id);
+        return null;
+    });
+
     get("/recipes/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       int id = Integer.parseInt(request.params("id"));
@@ -46,6 +58,13 @@ public class App {
       model.put("template", "templates/recipe.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    post("/tags/deleteAll", (request, response) -> {
+        HashMap<String, Object> model = new HashMap<String, Object>();
+        Tag.deleteAll();
+        response.redirect("/tags");
+        return null;
+    });
 
     get("/tags/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -59,7 +78,7 @@ public class App {
 
     post("/recipes", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      System.out.println("post/recipes");
+
       String recipe_name = request.queryParams("recipe_name");
       String ingredients = request.queryParams("ingredients");
       Recipe newRecipe = new Recipe(recipe_name, ingredients);
